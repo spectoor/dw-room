@@ -12,7 +12,7 @@ export default function ManageView({waitingRooms}) {
     waitingRooms.forEach((appointments, room) => {
       display.push(
         <div className={`mt-4`} key={`room-${room}`}>
-          <h3 className={`px-3 py-2 ${getWaitingRoomColor(room)}`}>{`Salle ${room}`}</h3>
+          <h2 className={`px-3 py-2 ${getWaitingRoomColor(room)}`}>{`Salle ${room}`}</h2>
 
           {
             appointments.map((appointment, index) =>
@@ -38,7 +38,7 @@ export default function ManageView({waitingRooms}) {
         <title>{pageMetadata.title}</title>
       </Head>
       <section className={'row'}>
-        <h2>Salles d'attente</h2>
+        <h1>Salles d'attente</h1>
         {
           displayWaitingRooms()
         }

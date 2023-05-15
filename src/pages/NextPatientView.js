@@ -7,6 +7,11 @@ const pageMetadata = {
 
 export default function NextPatientView({waitingRooms}) {
 
+  const shortenName = (name) => {
+    const spaceIndex = name.indexOf(" ");
+    return name.slice(0, spaceIndex + 2);
+  }
+
   const displayRoom = (room) => {
     let nextAppointement;
     const appointments = waitingRooms ? waitingRooms.get(room) : [];
@@ -14,13 +19,13 @@ export default function NextPatientView({waitingRooms}) {
 
     return <div className={'card-body d-flex flex-column justify-content-center'}>
       <div className={`d-flex justify-content-center`}>
-        <h1>{`Salle ${room}`}</h1>
+        <h2>{`Salle ${room}`}</h2>
       </div>
       {
         nextAppointement && <>
-          <div className='d-flex justify-content-center'>{nextAppointement.reference}</div>
-          <div className='d-flex justify-content-center display-4'>{nextAppointement.name}</div>
-        </>
+          <div className='d-flex justify-content-center'><h3>{nextAppointement.reference}</h3></div>
+          <div className='d-flex justify-content-center display-4'><h4>{shortenName(nextAppointement.name)}.</h4></div>
+        </> 
       }
     </div>
   };
@@ -30,13 +35,14 @@ export default function NextPatientView({waitingRooms}) {
       <Head>
         <title>{pageMetadata.title}</title>
       </Head>
+      <h1>RDV en cours</h1>
       <div className={'row'}>
         <div className={`col-5 card mt-5 ${styles.waitingRoom} bg-secondary`}>
           {
             displayRoom('A')
           }
         </div>
-        <div className={`col-5 offset-1 card mt-5 ${styles.waitingRoom} bg-warning`}>
+        <div className={`col-5 offset-1 card mt-5 ${styles.waitingRoom} bg-info`}>
           {
             displayRoom('C')
           }
