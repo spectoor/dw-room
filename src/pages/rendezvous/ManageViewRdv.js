@@ -3,7 +3,6 @@ import { getWaitingRoomColor } from "@/shared/colors";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { useForm } from "react-hook-form";
 
-
 const pageMetadata = {
   title: "Prise de rendez vous",
 };
@@ -15,7 +14,31 @@ export default function ManageView({ waitingRooms }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    // e.preventDefault();
+    console.log(data);
+
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/v1/appointments/newrdv",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Données envoyées avec succès !");
+      } else {
+        console.error("Erreur lors de l'envoi des données.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la requête :", error);
+    }
+  };
   return (
     <main className={"col-md-6 mb-4"}>
       <Head>
@@ -31,7 +54,7 @@ export default function ManageView({ waitingRooms }) {
         >
           <label htmlFor="firstName">Prénom:</label>
           <input
-            {...register("first", {
+            {...register("firstName", {
               required: "Prénom requis",
               minLength: 3,
               message: "Prenom trop court",
@@ -83,13 +106,11 @@ export default function ManageView({ waitingRooms }) {
           )}
 
           <label>Type de rdz</label>
-          <select
-            {...register("rdv", { required: true, maxLength: 20 })}
-          >
-            <option value="detartrage">Detartrage</option>
-            <option value="controle">Controle</option>
-            <option value="couronne">Couronne</option>
-            <option value="pediatrie">Pediatrie</option>
+          <select {...register("rdv", { required: true, maxLength: 20 })}>
+            <option value="1">Detartrage</option>
+            <option value="2">Controle</option>
+            <option value="3">Couronne</option>
+            <option value="4">Pediatrie</option>
           </select>
 
           <label>email:</label>
@@ -120,5 +141,3 @@ export default function ManageView({ waitingRooms }) {
     </main>
   );
 }
-
-
