@@ -1,38 +1,118 @@
 import Head from "next/head";
 import { getWaitingRoomColor } from "@/shared/colors";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { useForm } from "react-hook-form";
+
 
 const pageMetadata = {
   title: "Prise de rendez vous",
 };
 
 export default function ManageView({ waitingRooms }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
   return (
-    <main className={"container my-5"}>
+    <main className={"col-md-6 mb-4"}>
       <Head>
         <title>{pageMetadata.title}</title>
       </Head>
       <section className={"row"}>
         <h2>Prendre rendez-vous</h2>
 
-        <form action="/send-data-here" method="post">
-          <label for="first">Prénom:</label>
-          <input type="text" id="first" name="first" />
+        <form
+          action="http://localhost:8080/"
+          method="post"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <label htmlFor="firstName">Prénom:</label>
+          <input
+            {...register("first", {
+              required: "Prénom requis",
+              minLength: 3,
+              message: "Prenom trop court",
+            })}
+            aria-invalid={errors.first ? "true" : "false"}
+          />
 
-          <label for="last">Nom de famille:</label>
-          <input type="text" id="last" name="last" />
+          {errors.first && (
+            <p style={{ color: "red" }} role="alert">
+              {errors.first?.message}
+            </p>
+          )}
+          <label htmlFor="last">Nom de famille:</label>
+          <input
+            {...register("lastName", {
+              required: "Nom requis",
+              maxLength: 50,
+              minLength: 3,
+            })}
+            aria-invalid={errors.last ? "true" : "false"}
+          />
+          {errors.last && (
+            <p style={{ color: "red" }} role="alert">
+              {errors.last?.message}
+            </p>
+          )}
 
-          <label for="socialnumber">Numéro sécurité social:</label>
-          <input type="text" id="socialnumber" name="socialnumber" />
+          <label htmlFor="socialnumber">Numéro sécurité social:</label>
+          <input
+            {...register("numSecu", {
+              required:
+                "Votre numéro de sécurité sociale doit contenir 13 chiffres",
+              minLength: {
+                value: 13,
+                message:
+                  "Votre numéro de sécurité sociale doit contenir 13 chiffres",
+              },
+              maxLength: {
+                value: 13,
+                message:
+                  "Votre numéro de sécurité sociale doit contenir 13 chiffres",
+              },
+            })}
+          />
+          {errors.socialnumber && (
+            <p style={{ color: "red" }} role="alert">
+              {errors.socialnumber.message}
+            </p>
+          )}
 
-          <label for="email">email:</label>
-          <input type="email" id="email" name="email" />
+          <label>Type de rdz</label>
+          <select
+            {...register("rdv", { required: true, maxLength: 20 })}
+          >
+            <option value="detartrage">Detartrage</option>
+            <option value="controle">Controle</option>
+            <option value="couronne">Couronne</option>
+            <option value="pediatrie">Pediatrie</option>
+          </select>
 
-          <AddToCalendarButton
+          <label>email:</label>
+          <input
+            {...register("email", {
+              required: "Veuillez fournir votre adresse e-mail",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Veuillez fournir une adresse e-mail valide",
+              },
+            })}
+          />
+          {errors.email && (
+            <p style={{ color: "red" }} role="alert">
+              {errors.email.message}
+            </p>
+          )}
+
+          {/* <AddToCalendarButton
             name="Test-Event"
             startDate="2023-05-22"
             options={["Apple", "Google", "Yahoo", "iCal"]}
-          ></AddToCalendarButton>
+          ></AddToCalendarButton> */}
 
           <button type="submit">Submit</button>
         </form>
@@ -40,3 +120,5 @@ export default function ManageView({ waitingRooms }) {
     </main>
   );
 }
+
+
