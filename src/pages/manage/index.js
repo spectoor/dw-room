@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import ManageView from './ManageView';
 import { API_BASE_URL, FETCHER } from '@/shared/api';
+import SucessModal from './ModalView';
 
 export default function Manage() {
   const { data, error } = useSWR(`${API_BASE_URL}/waiting-rooms`, FETCHER);
@@ -11,6 +12,10 @@ export default function Manage() {
   const waitingRooms = new Map(Object.entries(data));
 
   return (
+    <div>
     <ManageView waitingRooms={waitingRooms}/>
+    <SucessModal/>
+
+    </div>
   );
 }

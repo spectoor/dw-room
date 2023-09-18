@@ -11,5 +11,6 @@ export default function NextPatient() {
 
   return (
     <NextPatientView waitingRooms={waitingRooms} />
+    
   );
 }

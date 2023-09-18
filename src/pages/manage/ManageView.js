@@ -32,7 +32,7 @@ export default function ManageView({waitingRooms}) {
     return display;
   }
 
-  return (
+return (
     <main className={'container my-5'}>
       <Head>
         <title>{pageMetadata.title}</title>
