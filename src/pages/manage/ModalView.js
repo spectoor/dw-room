@@ -15,7 +15,6 @@ function SucessModal() {
       <h1 style={{color: "green"}}>Success!</h1>
       <button style={{borderRadius: "15px",padding:"0.5rem",width:"25%"}}><ICalendarLink className="download_link" event={event}>Add to Calendar</ICalendarLink></button>
       <button style={{borderRadius: "15px",padding:"0.5rem",width:"25%"}}>Send recap email</button>
-      
     </div>
   );
 }
