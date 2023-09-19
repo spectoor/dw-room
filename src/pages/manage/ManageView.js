@@ -53,12 +53,15 @@ export default function ManageView({ waitingRooms }) {
         <h2>Salles d'attente</h2>
         {displayWaitingRooms()}
       </section>
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="btn btn-primary mt-3"
-      >
-        Open Modal
-      </button>
+      <div className="d-flex justify-content-center mt-3">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="btn btn-primary"
+          style={{ padding: "10px", width: "150px" }}
+        >
+          Save
+        </button>
+      </div>
       {isModalOpen && <SucessModal onClose={() => setIsModalOpen(false)} />}
     </main>
   );
