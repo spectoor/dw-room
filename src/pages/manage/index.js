@@ -11,10 +11,17 @@ export default function Manage() {
 
   const waitingRooms = new Map(Object.entries(data));
 
+  const appointmentFormData = new FormData();
+  appointmentFormData.append("nom", "abdelmoula");
+  appointmentFormData.append("prenom", "olivier");
+  appointmentFormData.append("noSS", "1910175104446");
+  appointmentFormData.append("tel", "0102030405");
+  appointmentFormData.append("mail", "olivier.abdelmoula@gmail.com");
+
   return (
     <div>
     <ManageView waitingRooms={waitingRooms}/>
-    <SucessModal/>
+    <SucessModal appointmentFormData={appointmentFormData}/>
 
     </div>
   );
