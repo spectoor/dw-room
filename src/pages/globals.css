@@ -5,3 +5,8 @@
 * {
   font-family: var(--font-plex);
 }
+
+.download_link {
+ color: black;
+  text-decoration: none;
+}
