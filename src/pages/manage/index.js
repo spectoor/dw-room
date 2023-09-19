@@ -21,7 +21,7 @@ export default function Manage() {
   return (
     <div>
     <ManageView waitingRooms={waitingRooms}/>
-    <SucessModal appointmentFormData={appointmentFormData}/>
+    <SucessModal fakeFormData={appointmentFormData}/>
 
     </div>
   );
