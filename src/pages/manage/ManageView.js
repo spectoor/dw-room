@@ -1,5 +1,5 @@
 import Head from "next/head";
-import SucessModal from "./SucessModal";
+import SuccessModal from "./ModalView";
 import { getWaitingRoomColor } from "@/shared/colors";
 import React, { useState } from "react";
 
@@ -62,7 +62,7 @@ export default function ManageView({ waitingRooms }) {
           Save
         </button>
       </div>
-      {isModalOpen && <SucessModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen && <SuccessModal onClose={() => setIsModalOpen(false)} />}
     </main>
   );
 }

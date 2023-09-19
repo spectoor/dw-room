@@ -1,5 +1,4 @@
 import useSWR from "swr";
-import SucessModal from "./SucessModal";
 import ManageView from "./ManageView";
 import { API_BASE_URL, FETCHER } from "@/shared/api";
 
