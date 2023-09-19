@@ -38,14 +38,17 @@ function SucessModal({ onClose }) {
                 style={{ padding: "10px", fontSize: "14px", width: "90%" }}
               >
                 <ICalendarLink className="download_link" event={event}>
-                  Add to Calendar
+                  Ajouter au calendrier
                 </ICalendarLink>
               </button>
               <button
                 className="btn btn-secondary btn-sm mx-auto"
                 style={{ padding: "10px", fontSize: "14px", width: "90%" }}
               >
-                Send recap email
+                <a href="mailto:adresse@email.com?subject=Confirmation de votre rendez-vous médical&body=Bonjour,
+                 %0D%0A
+                %0D%0A Votre rendez-vous médical à bien été confirmé.
+                %0D%0A Veuillez noter qu'une absence au rendez-vous que vous avez pris vous placera sur une liste noire et vous ne pourrez plus prendre de rendez-vous à l'avenir.">Envoyer un récapitulatif par mail</a>
               </button>
             </div>
           </div>
