@@ -1,11 +1,10 @@
-import useSWR from 'swr';
-import ManageView from './ManageView';
-import { API_BASE_URL, FETCHER } from '@/shared/api';
-import SucessModal from './ModalView';
+import useSWR from "swr";
+import ManageView from "./ManageView";
+import { API_BASE_URL, FETCHER } from "@/shared/api";
 
 export default function Manage() {
   const { data, error } = useSWR(`${API_BASE_URL}/waiting-rooms`, FETCHER);
- 
+
   if (error) return <div>Erreur lors du chargement des salles d'attente</div>;
   if (!data) return <div>Chargement...</div>;
 
@@ -21,7 +20,6 @@ export default function Manage() {
   return (
     <div>
     <ManageView waitingRooms={waitingRooms}/>
-    <SucessModal fakeFormData={appointmentFormData}/>
 
     </div>
   );
