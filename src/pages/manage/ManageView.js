@@ -5,7 +5,7 @@ const pageMetadata = {
   title: 'Dental Waiting Room - Manage'
 };
 
-export default function ManageView({waitingRooms}) {
+export default function ManageView({waitingRooms, appointmentFormData}) {
 
   const displayWaitingRooms = () => {
     const display = [];
